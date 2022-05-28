@@ -1,18 +1,55 @@
 package de.gamestart.java;
 
-import de.gamestart.java.data.City;
-import de.gamestart.java.data.Flight;
+import de.gamestart.java.data.*;
 import de.gamestart.java.models.AirportModel;
 import de.gamestart.java.models.CityModel;
 import de.gamestart.java.models.FlightsModel;
+import de.gamestart.java.repository.AirportRepository;
+import de.gamestart.java.repository.FarbeRepository;
+import de.gamestart.java.repository.FlightRepository;
+import de.gamestart.java.repository.HaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 
 
 @SpringBootApplication
-public class FlightSystemApplication {
+public class FlightSystemApplication implements CommandLineRunner {
+	@Autowired
+	public FlightRepository flightRepository;
+
+	@Autowired
+	public AirportRepository airportRepository;
+
+	@Autowired
+	public HaseRepository haseRepository;
+
+	@Autowired
+	public FarbeRepository farbeRepository;
+
+	@Override
+	public void run(String... args) {
+		/*Airport t = new Airport(1, "felix sein zuhause", 34.2, 32.3, null);
+		Airport t1 = new Airport(2, "felix sein zuhause", 34.2, 32.3, null);
+
+		airportRepository.save(t);
+		airportRepository.save(t1);
+		flightRepository.save(new Flight(1, "ABC", t, new java.sql.Date(Calendar.getInstance().getTime().getTime()), t1, new java.sql.Date(Calendar.getInstance().getTime().getTime())));
+		System.out.println(flightRepository.findAll().size());*/
+		Hase h = new Hase();
+		Farbe f = new Farbe();
+		farbeRepository.save(f);
+		h.setColor(f);
+		haseRepository.save(h);
+		System.out.println(haseRepository.findAll().size());
+	}
+
 	public static void main(String[] args) {
 		Database.openConnect();
 		Database.executeUpdate(CityModel.TABLE_CREATION);
