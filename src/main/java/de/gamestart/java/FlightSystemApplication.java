@@ -1,91 +1,85 @@
 package de.gamestart.java;
 
-import de.gamestart.java.data.*;
-import de.gamestart.java.models.AirportModel;
-import de.gamestart.java.models.CityModel;
-import de.gamestart.java.models.FlightsModel;
+import de.gamestart.java.data.Airport;
+import de.gamestart.java.data.City;
+import de.gamestart.java.data.Flight;
 import de.gamestart.java.repository.AirportRepository;
-import de.gamestart.java.repository.FarbeRepository;
+import de.gamestart.java.repository.CityRepository;
 import de.gamestart.java.repository.FlightRepository;
-import de.gamestart.java.repository.HaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @SpringBootApplication
 public class FlightSystemApplication implements CommandLineRunner {
-	@Autowired
-	public FlightRepository flightRepository;
-
-	@Autowired
-	public AirportRepository airportRepository;
-
-	@Autowired
-	public HaseRepository haseRepository;
-
-	@Autowired
-	public FarbeRepository farbeRepository;
 
 	@Override
 	public void run(String... args) {
-		/*Airport t = new Airport(1, "felix sein zuhause", 34.2, 32.3, null);
-		Airport t1 = new Airport(2, "felix sein zuhause", 34.2, 32.3, null);
-
-		airportRepository.save(t);
-		airportRepository.save(t1);
-		flightRepository.save(new Flight(1, "ABC", t, new java.sql.Date(Calendar.getInstance().getTime().getTime()), t1, new java.sql.Date(Calendar.getInstance().getTime().getTime())));
-		System.out.println(flightRepository.findAll().size());*/
-		Hase h = new Hase();
-		Farbe f = new Farbe();
-		farbeRepository.save(f);
-		h.setColor(f);
-		haseRepository.save(h);
-		System.out.println(haseRepository.findAll().size());
+		initData();
 	}
 
 	public static void main(String[] args) {
-		Database.openConnect();
-		Database.executeUpdate(CityModel.TABLE_CREATION);
-		Database.executeUpdate(FlightsModel.TABLE_CREATION);
-		Database.executeUpdate(AirportModel.TABLE_CREATION);
-		/*
-		CityModel.insert(1, "hase2", 0.3, 0.3);
-		City model = CityModel.find("hase2");
-		 */
-		loadData();
-
 		SpringApplication.run(FlightSystemApplication.class, args);
 	}
-	private static void loadData(){
-		CityModel.deleteAll();
-		CityModel.insert(2, "test2", 10, 20);
-		CityModel.insert(3, "test3", 10, 20);
-		CityModel.insert(4, "test4", 10, 20);
-		CityModel.insert(5, "test5", 10, 20);
-		CityModel.insert(6, "test6", 10, 20);
-		CityModel.insert(7, "test7", 10, 20);
-		CityModel.insert(8, "test8", 10, 20);
-		CityModel.insert(9, "test9", 10, 20);
 
-		boolean bool = AirportModel.insert(1, "München", 80.0, 70.1, 3);
-		System.out.println(bool);
-		/*
-		FlightsModel.deleteAll();
-		System.out.println(FlightsModel.insert(2, "F130", 2, 18, 7, 20));
-		FlightsModel.insert(3, "F130", 3, 18, 6, 20);
-		FlightsModel.insert(4, "F130", 4, 18,5, 20);
-		FlightsModel.insert(5, "F136whw", 5, 18, 4, 20);
-		FlightsModel.insert(6, "F140", 6, 18, 3, 20);
-		FlightsModel.insert(7, "F150", 7, 18, 2, 20);
+	@Autowired
+	private AirportRepository airportRepository;
 
-		 */
+	@Autowired
+	private CityRepository cityRepository;
+
+	@Autowired
+	private FlightRepository flightRepository;
+
+	private void initData() {
+		City Munich = new City("Munich", 34.4, 78);
+		City Hamburg = new City("Hamburg", 24.4, 44);
+		City Dresden = new City("Dresden", 36.4, 23);
+		City Berlin = new City("Berlin", 24.3, 25);
+		City Paris = new City("Paris", 14.4, 3);
+
+		Airport munich_airport = new Airport("Munich Airport", 23.3, 23.2, Munich);
+		Airport hamburg_airport = new Airport("Hamburg Airport", 23.3, 23.2, Hamburg);
+		Airport dresden_airport = new Airport("Dresden Airport", 23.3, 23.2, Dresden);
+		Airport berlin_airport = new Airport("Berlin Airport", 23.3, 23.2, Berlin);
+		Airport berlin_tegel_airport = new Airport("Berlin Tegel Airport", 23.3, 23.2, Berlin);
+		Airport paris_airport = new Airport("Paris Airport", 23.3, 23.2, Paris);
+
+		Flight munich_to_hamburg = new Flight("ABC", munich_airport, new Date(2022, 5, 3), hamburg_airport, new Date(2022, 5, 3), "Lufthansa");
+		Flight munich_to_hamburg2 = new Flight("ABCD", munich_airport, new Date(2022, 5, 4), hamburg_airport, new Date(2022, 5, 4), "Lufthansa");
+		Flight paris_to_berlinT = new Flight("ABCII", paris_airport, new Date(2022, 5, 4), berlin_tegel_airport, new Date(2022, 5, 4), "Emirates");
+		Flight berlinT_to_berlin = new Flight("ABC", berlin_tegel_airport, new Date(2022, 5, 2), berlin_airport, new Date(2022, 5, 2), "Turkish Airline");
+		Flight munich_to_dresden = new Flight("ABC", munich_airport, new Date(2022, 5, 2), dresden_airport, new Date(2022, 5, 2), "Eurowings");
+
+		List<City> cities = new ArrayList<>();
+		cities.add(Munich);
+		cities.add(Hamburg);
+		cities.add(Dresden);
+		cities.add(Berlin);
+		cities.add(Paris);
+		cityRepository.saveAllAndFlush(cities);
+
+		List<Airport> airports = new ArrayList<>();
+		airports.add(munich_airport);
+		airports.add(hamburg_airport);
+		airports.add(dresden_airport);
+		airports.add(berlin_airport);
+		airports.add(berlin_tegel_airport);
+		airports.add(paris_airport);
+		airportRepository.saveAllAndFlush(airports);
+
+		List<Flight> flights = new ArrayList<>();
+		flights.add(munich_to_hamburg);
+		flights.add(munich_to_hamburg2);
+		flights.add(paris_to_berlinT);
+		flights.add(berlinT_to_berlin);
+		flights.add(munich_to_dresden);
+		flightRepository.saveAllAndFlush(flights);
 	}
-
 }

@@ -1,101 +1,47 @@
 package de.gamestart.java.data;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 import javax.persistence.*;
-import java.beans.ConstructorProperties;
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 public class Flight extends Data {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "flight_id")
-    private int flightId;
+    public long flightId;
 
-    @Column(name = "flight_number")
-    private String flightNumber;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "departure_airport_id", referencedColumnName = "airport_id")
-    private Airport departureAirport;
-
-    @Column(name = "departure_date")
-    private Date departureDate;
+    public String flightNumber;
 
     @ManyToOne
-    @JoinColumn(name = "arrival_airport_id", referencedColumnName = "airport_id")
-    private Airport arrivalAirport;
+    @JoinColumn(name = "depature_airport_id")
+    public Airport departureAirport;
 
-    @Column(name = "arrival_date")
-    private Date arrivalDate;
+    public Date departureDate;
+
+    @ManyToOne
+    @JoinColumn(name = "arrival_airport_id")
+    public Airport arrivalAirport;
+
+    public Date arrivalDate;
+
+    public String airline;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "savedFlight")
+    public Set<Account> savedBy;
 
     public Flight() {
 
     }
 
-    //@ConstructorProperties({"flightNumber", "departureAirport", "departureDate", "arrivalAirport", "arrivalDate"})
-    public Flight(String flightNumber, Airport departureAirport, Date departureDate, Airport arrivalAirport, Date arrivalDate) {
+    public Flight(String flightNumber, Airport departureAirport, Date departureDate, Airport arrivalAirport, Date arrivalDate, String airline) {
         this.flightNumber = flightNumber;
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
-    }
-
-    public int getFlightId() {
-        return flightId;
-    }
-
-    public Date getDepartureDate() {
-        return departureDate;
-    }
-
-    public void setDepartureDate(Date departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public Date getArrivalDate() {
-        return arrivalDate;
-    }
-
-    public void setArrivalDate(Date arrivalDate) {
-        this.arrivalDate = arrivalDate;
-    }
-
-    public void setFlightId(int flightId) {
-        this.flightId = flightId;
-    }
-
-    public String getFlightNumber() {
-        return flightNumber;
-    }
-
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-    }
-
-    public Airport getdeparture() {
-        return departureAirport;
-    }
-
-    public void setdeparture(Airport departure) {
-        this.departureAirport = departure;
-    }
-
-    public Airport getArrivalAirport() {
-        return arrivalAirport;
-    }
-
-    public void setArrivalAirport(Airport arrivalAirport) {
-        this.arrivalAirport = arrivalAirport;
-    }
-
-    @Override
-    public String toString() {
-        return "Flight{" +
-                "Id=" + flightId +
-                ", flightNumber='" + flightNumber + '\'' +
-                ", departure=" + departureAirport +
-                ", arrival=" + arrivalAirport +
-                '}';
+        this.airline = airline;
     }
 }
