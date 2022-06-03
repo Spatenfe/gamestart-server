@@ -11,7 +11,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,11 +52,11 @@ public class FlightSystemApplication implements CommandLineRunner {
 		Airport berlin_tegel_airport = new Airport("Berlin Tegel Airport", 23.3, 23.2, Berlin);
 		Airport paris_airport = new Airport("Paris Airport", 23.3, 23.2, Paris);
 
-		Flight munich_to_hamburg = new Flight("ABC", munich_airport, new Date(2022, 5, 3), hamburg_airport, new Date(2022, 5, 3), "Lufthansa");
-		Flight munich_to_hamburg2 = new Flight("ABCD", munich_airport, new Date(2022, 5, 4), hamburg_airport, new Date(2022, 5, 4), "Lufthansa");
-		Flight paris_to_berlinT = new Flight("ABCII", paris_airport, new Date(2022, 5, 4), berlin_tegel_airport, new Date(2022, 5, 4), "Emirates");
-		Flight berlinT_to_berlin = new Flight("ABC", berlin_tegel_airport, new Date(2022, 5, 2), berlin_airport, new Date(2022, 5, 2), "Turkish Airline");
-		Flight munich_to_dresden = new Flight("ABC", munich_airport, new Date(2022, 5, 2), dresden_airport, new Date(2022, 5, 2), "Eurowings");
+		Flight munich_to_hamburg = new Flight("ABC", munich_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), hamburg_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Lufthansa");
+		Flight munich_to_hamburg2 = new Flight("ABCD", munich_airport, LocalDate.of(2022, 6, 2), LocalTime.now(), hamburg_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Lufthansa");
+		Flight paris_to_berlinT = new Flight("ABCII", paris_airport, LocalDate.of(2022, 6, 2), LocalTime.now(), berlin_tegel_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Emirates");
+		Flight berlinT_to_berlin = new Flight("ABC", berlin_tegel_airport, LocalDate.of(2022, 6, 3), LocalTime.now(), berlin_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Turkish Airline");
+		Flight munich_to_dresden = new Flight("ABC", munich_airport, LocalDate.of(2022, 6, 3), LocalTime.now(), dresden_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Eurowings");
 
 		List<City> cities = new ArrayList<>();
 		cities.add(Munich);

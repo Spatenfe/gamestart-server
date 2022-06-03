@@ -1,6 +1,7 @@
 package de.gamestart.java.data;
 
 import net.bytebuddy.utility.RandomString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -20,6 +21,7 @@ public class Account {
     public String userName;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "saved_flight",
             joinColumns = @JoinColumn(name = "account_id"),

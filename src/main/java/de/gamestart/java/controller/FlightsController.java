@@ -7,10 +7,12 @@ import de.gamestart.java.repository.AccountRepository;
 import de.gamestart.java.repository.AirportRepository;
 import de.gamestart.java.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -36,12 +38,16 @@ public class FlightsController {
     @GetMapping("/find")
     public ResponseEntity<List<Flight>> findFlight(@RequestParam String accessToken,
                                                    @RequestParam long departureAirport, @RequestParam long arrivalAirport,
-                                                   @RequestParam Date departureDate) {
+                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate) {
         if(accountRepository.findByAccessToken(accessToken).size() == 0) {
             return ResponseEntity.badRequest().build();
         }
 
-        //TODO: findByID may fail when there is no airport with this id
+        if(airportRepository.findById(departureAirport).isEmpty() ||
+                airportRepository.findById(arrivalAirport).isEmpty()) {
+            return ResponseEntity.ok(new ArrayList<>());
+        }
+
         Airport departure = airportRepository.findById(departureAirport).get();
         Airport arrival = airportRepository.findById(arrivalAirport).get();
         return ResponseEntity.ok(flightRepository.findByDepartureAirportAndArrivalAirportAndDepartureDate(
@@ -61,6 +67,27 @@ public class FlightsController {
         return ResponseEntity.ok(account.savedFlight.stream().toList());
     }
 
+    @DeleteMapping("/unsaveFlight")
+    public ResponseEntity<Flight> unsaveFlight(@RequestParam String accessToken, @RequestParam long flightID) {
+        if(accountRepository.findByAccessToken(accessToken).size() == 0) {
+            return ResponseEntity.badRequest().build();
+        }
+        Account account = accountRepository.findByAccessToken(accessToken).get(0);
+
+        if(flightRepository.findById(flightID).isEmpty()) {
+            return ResponseEntity.ok(null);
+        }
+        Flight flight = flightRepository.findById(flightID).get();
+
+        if(!account.savedFlight.remove(flight)) {
+            return ResponseEntity.ok(null);
+        }
+
+        accountRepository.saveAndFlush(account);
+
+        return ResponseEntity.ok(flight);
+    }
+
     @PostMapping("/saveFlight")
     public ResponseEntity<Flight> saveFlight(@RequestParam String accessToken, @RequestParam long flightID) {
         if(accountRepository.findByAccessToken(accessToken).size() == 0) {
@@ -68,7 +95,10 @@ public class FlightsController {
         }
 
         Account account = accountRepository.findByAccessToken(accessToken).get(0);
-        //TODO: bad request if flight not exist so id is invalid
+        if(flightRepository.findById(flightID).isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
         Flight flight = flightRepository.findById(flightID).get();
         account.savedFlight.add(flight);
         accountRepository.saveAndFlush(account);
