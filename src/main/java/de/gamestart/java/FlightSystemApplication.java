@@ -32,7 +32,7 @@ public class FlightSystemApplication implements CommandLineRunner {
 			}
 		};
 	}
-
+  
 	@Override
 	public void run(String... args) {
 		initData();
