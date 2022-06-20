@@ -35,9 +35,7 @@ public class Flight extends Data {
     @JsonIgnore
     public Set<Account> savedBy;
 
-    public Flight() {
-
-    }
+    public Flight() {}
 
     public Flight(String flightNumber,
                   Airport departureAirport,

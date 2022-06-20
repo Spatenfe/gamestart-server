@@ -31,6 +31,7 @@ public class AccountController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestParam String userName, @RequestParam String passwordHash) {
+        System.out.println(userName + passwordHash);
         if(accountRepository.findByUserName(userName).size() > 0) {
             return ResponseEntity.badRequest().build();
         }

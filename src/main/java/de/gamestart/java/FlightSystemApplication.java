@@ -3,9 +3,11 @@ package de.gamestart.java;
 import de.gamestart.java.data.Airport;
 import de.gamestart.java.data.City;
 import de.gamestart.java.data.Flight;
+import de.gamestart.java.data.PointOfInterest;
 import de.gamestart.java.repository.AirportRepository;
 import de.gamestart.java.repository.CityRepository;
 import de.gamestart.java.repository.FlightRepository;
+import de.gamestart.java.repository.PointOfInterestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -51,6 +53,9 @@ public class FlightSystemApplication implements CommandLineRunner {
 	@Autowired
 	private FlightRepository flightRepository;
 
+	@Autowired
+	private PointOfInterestRepository pointOfInterestRepository;
+
 	private void initData() {
 		City Munich = new City("Munich", 34.4, 78);
 		City Hamburg = new City("Hamburg", 24.4, 44);
@@ -70,6 +75,17 @@ public class FlightSystemApplication implements CommandLineRunner {
 		Flight paris_to_berlinT = new Flight("ABCII", paris_airport, LocalDate.of(2022, 6, 2), LocalTime.now(), berlin_tegel_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Emirates");
 		Flight berlinT_to_berlin = new Flight("ABC", berlin_tegel_airport, LocalDate.of(2022, 6, 3), LocalTime.now(), berlin_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Turkish Airline");
 		Flight munich_to_dresden = new Flight("ABC", munich_airport, LocalDate.of(2022, 6, 3), LocalTime.now(), dresden_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Eurowings");
+
+		PointOfInterest TestPoi = new PointOfInterest("poiName", "poiContinent", "poiCountry", Munich, 10.4, 11.4, "poiDescription", "shorturl.at/tzO48", PointOfInterest.PoiType.OTHER);
+		PointOfInterest Bundestag = new PointOfInterest("Bundestag", "Europa", "Deutschland", Berlin, 1.4, 18.4, "Ist ziehmlich langweilig", "https://www.bundestag.de/resource/image/462008/16x9/750/422/d89f0f8b9392effdeb7d18d27754a859/55F9E6C4EA0E758275AA3DB2A11B5D98/plenum_teaser_sitzungsverlauf_bild.jpg",
+				PointOfInterest.PoiType.LANDMARK);
+		PointOfInterest BerlinerMauer = new PointOfInterest("Berliner Mauer", "Europa", "Deutschland", Berlin, 10.4, 11.4, "Ist ziehmlich lang", "https://images.reisereporter.de/YQgEixCsxcDJI97tFO1-D8XDMUp4odr8UI1Ji9VaVME/g:sm/rs:fill:1920:1080/ZWNkNGMxNDMtZGE/1OS00MGRlLWEzYW/ItMDBkOWM5OTRiM/GU5LmpwZw", PointOfInterest.PoiType.LANDMARK);
+		PointOfInterest TUM = new PointOfInterest("TUM Universität", "Europa", "Deutschland", Munich, 13.4, 8.4, "Ist ziehmlich cool", "https://www.tum.de/fileadmin/_processed_/3/2/csm_logo-tum_35fd07f043.png",
+				PointOfInterest.PoiType.PUBLIC_BUILDING);
+		PointOfInterest Eifelturm = new PointOfInterest("Eifelturm", "Europa", "Frankreich", Paris, 7.2, 5.6, "Ist ziehmlich hoch - La baguette!!!", "https://i.pinimg.com/736x/ce/4b/c3/ce4bc376016d8202176bdb9a479f46aa.jpg",
+				PointOfInterest.PoiType.LANDMARK);
+		PointOfInterest NightClub = new PointOfInterest("Trivia", "Europa", "Frankreich", Dresden, 7.2, 5.6, "Ist ziehmlich laut", "https://upload.wikimedia.org/wikipedia/commons/3/32/Wikipedia_space_ibiza%2803%29.jpg",
+				PointOfInterest.PoiType.NIGHTLIFE);
 
 		List<City> cities = new ArrayList<>();
 		cities.add(Munich);
@@ -95,5 +111,17 @@ public class FlightSystemApplication implements CommandLineRunner {
 		flights.add(berlinT_to_berlin);
 		flights.add(munich_to_dresden);
 		flightRepository.saveAllAndFlush(flights);
+
+
+        List<PointOfInterest> pois = new ArrayList<>();
+        pois.add(TestPoi);
+        pois.add(Bundestag);
+        pois.add(BerlinerMauer);
+        pois.add(TUM);
+        pois.add(Eifelturm);
+        pois.add(NightClub);
+        pointOfInterestRepository.saveAllAndFlush(pois);
+
+
 	}
 }

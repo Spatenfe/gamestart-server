@@ -29,6 +29,10 @@ public class Account {
     )
     public Set<Flight> savedFlight;
 
+    @OneToMany
+    @JsonIgnore
+    public Set<SavedPointOfInterest> savedPoi;
+
     //Password will be saved as SHA-256
     public String passwordHash;
 
