@@ -77,7 +77,6 @@ public class PointOfInterestController {
 
     @PostMapping("/savePoi")
     public ResponseEntity<SavedPointOfInterest> savePoi(@RequestParam String accessToken, @RequestParam long poiId) {
-        System.out.println(accessToken + poiId);
         if (accountRepository.findByAccessToken(accessToken).size() == 0) {
             return ResponseEntity.badRequest().build();
         }
