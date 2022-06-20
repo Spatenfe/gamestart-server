@@ -20,6 +20,9 @@ public class Account {
     @Column(unique=true)
     public String userName;
 
+    public String firstName;
+    public String lastName;
+
     @ManyToMany
     @JsonIgnore
     @JoinTable(
@@ -41,8 +44,10 @@ public class Account {
 
     }
 
-    public Account(String userName, String passwordHash) {
+    public Account(String userName, String firstName, String lastName, String passwordHash) {
         this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.passwordHash = passwordHash;
         this.accessToken = generateRandomAccessToken();
         this.privilidges = UserPrivilidges.USER_PRIVILIDGES;

@@ -22,12 +22,18 @@ public class Flight extends Data {
     public LocalDate departureDate;
     public LocalTime departureTime;
 
+    public char departureGate;
+    public int departureTerminal;
+
     @ManyToOne
     @JoinColumn(name = "arrival_airport_id")
     public Airport arrivalAirport;
 
     public LocalDate arrivalDate;
     public LocalTime arrivalTime;
+
+    public char arrivalGate;
+    public int arrivalTerminal;
 
     public String airline;
 
@@ -43,13 +49,20 @@ public class Flight extends Data {
                   Airport departureAirport,
                   LocalDate departureDate,
                   LocalTime departureTime,
+                  char departureGate,
+                  int departureTerminal,
                   Airport arrivalAirport,
                   LocalDate arrivalDate,
                   LocalTime arrivalTime,
+                  char arrivalGate,
+                  int arrivalTerminal,
                   String airline) {
         this.flightNumber = flightNumber;
         this.departureAirport = departureAirport;
+        this.departureGate = departureGate;
+        this.departureTerminal = departureTerminal;
         this.arrivalAirport = arrivalAirport;
+        this.arrivalTerminal = arrivalTerminal;
         this.departureDate = departureDate;
         this.departureTime = departureTime;
         this.arrivalDate = arrivalDate;

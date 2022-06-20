@@ -11,6 +11,9 @@ public class Airport extends Data{
 
     @Column(unique = true)
     public String airportName;
+
+    @Column(unique = true)
+    public String airportSymbol;
     public double airportPosLat;
     public double airportPosLong;
 
@@ -22,8 +25,9 @@ public class Airport extends Data{
 
     }
 
-    public Airport(String airportName, double airportPosLat, double airportPosLong, City locationCity) {
+    public Airport(String airportName, String airportSymbol, double airportPosLat, double airportPosLong, City locationCity) {
         this.airportName = airportName;
+        this.airportSymbol = airportSymbol;
         this.airportPosLat = airportPosLat;
         this.airportPosLong = airportPosLong;
         this.locationCity = locationCity;

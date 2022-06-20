@@ -58,18 +58,18 @@ public class FlightSystemApplication implements CommandLineRunner {
 		City Berlin = new City("Berlin", 24.3, 25);
 		City Paris = new City("Paris", 14.4, 3);
 
-		Airport munich_airport = new Airport("Munich Airport", 23.3, 23.2, Munich);
-		Airport hamburg_airport = new Airport("Hamburg Airport", 23.3, 23.2, Hamburg);
-		Airport dresden_airport = new Airport("Dresden Airport", 23.3, 23.2, Dresden);
-		Airport berlin_airport = new Airport("Berlin Airport", 23.3, 23.2, Berlin);
-		Airport berlin_tegel_airport = new Airport("Berlin Tegel Airport", 23.3, 23.2, Berlin);
-		Airport paris_airport = new Airport("Paris Airport", 23.3, 23.2, Paris);
+		Airport munich_airport = new Airport("Munich Airport", "MNX", 23.3, 23.2, Munich);
+		Airport hamburg_airport = new Airport("Hamburg Airport", "HA", 23.3, 23.2, Hamburg);
+		Airport dresden_airport = new Airport("Dresden Airport", "DA", 23.3, 23.2, Dresden);
+		Airport berlin_airport = new Airport("Berlin Airport", "BTX", 23.3, 23.2, Berlin);
+		Airport berlin_tegel_airport = new Airport("Berlin Tegel Airport", "BTA", 23.3, 23.2, Berlin);
+		Airport paris_airport = new Airport("Paris Airport", "PA", 23.3, 23.2, Paris);
 
-		Flight munich_to_hamburg = new Flight("ABC", munich_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), hamburg_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Lufthansa");
-		Flight munich_to_hamburg2 = new Flight("ABCD", munich_airport, LocalDate.of(2022, 6, 2), LocalTime.now(), hamburg_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Lufthansa");
-		Flight paris_to_berlinT = new Flight("ABCII", paris_airport, LocalDate.of(2022, 6, 2), LocalTime.now(), berlin_tegel_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Emirates");
-		Flight berlinT_to_berlin = new Flight("ABC", berlin_tegel_airport, LocalDate.of(2022, 6, 3), LocalTime.now(), berlin_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Turkish Airline");
-		Flight munich_to_dresden = new Flight("ABC", munich_airport, LocalDate.of(2022, 6, 3), LocalTime.now(), dresden_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), "Eurowings");
+		Flight munich_to_hamburg = new Flight("ABC", munich_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), 'C', 1, hamburg_airport, LocalDate.of(2022, 6, 4), LocalTime.now(),'C', 1,  "Lufthansa");
+		Flight munich_to_hamburg2 = new Flight("ABCD", munich_airport, LocalDate.of(2022, 6, 2), LocalTime.now(), 'C', 1, hamburg_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), 'C', 1, "Lufthansa");
+		Flight paris_to_berlinT = new Flight("ABCII", paris_airport, LocalDate.of(2022, 6, 2), LocalTime.now(), 'C', 1, berlin_tegel_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), 'C', 1, "Emirates");
+		Flight berlinT_to_berlin = new Flight("ABC", berlin_tegel_airport, LocalDate.of(2022, 6, 3), LocalTime.now(), 'C', 1, berlin_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), 'C', 1, "Turkish Airline");
+		Flight munich_to_dresden = new Flight("ABC", munich_airport, LocalDate.of(2022, 6, 3), LocalTime.now(), 'C', 1, dresden_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), 'C', 1, "Eurowings");
 
 		List<City> cities = new ArrayList<>();
 		cities.add(Munich);
