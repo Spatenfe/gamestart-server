@@ -23,14 +23,9 @@ public class Account {
     public String firstName;
     public String lastName;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "savedByAccount")
     @JsonIgnore
-    @JoinTable(
-            name = "saved_flight",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "flight_id")
-    )
-    public Set<Flight> savedFlight;
+    public Set<FlightTicket> flightTickets;
 
     //Password will be saved as SHA-256
     public String passwordHash;

@@ -38,7 +38,7 @@ public class AccountController {
             return ResponseEntity.badRequest().build();
         }
 
-        Account account = new Account(userName, firstName, lastName passwordHash);
+        Account account = new Account(userName, firstName, lastName, passwordHash);
 
         accountRepository.save(account);
         return ResponseEntity.ok(account.accessToken);

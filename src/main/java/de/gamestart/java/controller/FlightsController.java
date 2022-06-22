@@ -3,6 +3,7 @@ package de.gamestart.java.controller;
 import de.gamestart.java.data.Account;
 import de.gamestart.java.data.Airport;
 import de.gamestart.java.data.Flight;
+import de.gamestart.java.data.FlightTicket;
 import de.gamestart.java.repository.AccountRepository;
 import de.gamestart.java.repository.AirportRepository;
 import de.gamestart.java.repository.FlightRepository;
@@ -58,13 +59,13 @@ public class FlightsController {
     }
 
     @GetMapping("/savedFlights")
-    public ResponseEntity<List<Flight>> savedFlights(@RequestParam String accessToken) {
+    public ResponseEntity<List<FlightTicket>> savedFlights(@RequestParam String accessToken) {
         if(accountRepository.findByAccessToken(accessToken).size() == 0) {
             return ResponseEntity.badRequest().build();
         }
 
         Account account = accountRepository.findByAccessToken(accessToken).get(0);
-        return ResponseEntity.ok(account.savedFlight.stream().toList());
+        return ResponseEntity.ok(account.flightTickets.stream().toList());
     }
 
     @DeleteMapping("/unsaveFlight")
@@ -79,7 +80,11 @@ public class FlightsController {
         }
         Flight flight = flightRepository.findById(flightID).get();
 
-        if(!account.savedFlight.remove(flight)) {
+        if(account.flightTickets.stream().filter(t -> t.saveFlight.flightId == flightID).findFirst().isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if(!account.flightTickets.remove(account.flightTickets.stream().filter(t -> t.saveFlight.flightId == flightID).findFirst().get())) {
             return ResponseEntity.ok(null);
         }
 
@@ -89,7 +94,9 @@ public class FlightsController {
     }
 
     @PostMapping("/saveFlight")
-    public ResponseEntity<Flight> saveFlight(@RequestParam String accessToken, @RequestParam long flightID) {
+    public ResponseEntity<FlightTicket> saveFlight(@RequestParam String accessToken,
+                                             @RequestParam long flightID,
+                                             @RequestParam String seat) {
         if(accountRepository.findByAccessToken(accessToken).size() == 0) {
             return ResponseEntity.badRequest().build();
         }
@@ -100,8 +107,9 @@ public class FlightsController {
         }
 
         Flight flight = flightRepository.findById(flightID).get();
-        account.savedFlight.add(flight);
+        FlightTicket flightTicket = new FlightTicket(flight, account, seat);
+        account.flightTickets.add(flightTicket);
         accountRepository.saveAndFlush(account);
-        return ResponseEntity.ok(flight);
+        return ResponseEntity.ok(flightTicket);
     }
 }
