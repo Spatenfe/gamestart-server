@@ -30,13 +30,15 @@ public class AccountController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestParam String userName, @RequestParam String passwordHash) {
-        System.out.println(userName + passwordHash);
+    public ResponseEntity<String> register(@RequestParam String userName,
+                                           @RequestParam String firstName,
+                                           @RequestParam String lastName,
+                                           @RequestParam String passwordHash) {
         if(accountRepository.findByUserName(userName).size() > 0) {
             return ResponseEntity.badRequest().build();
         }
 
-        Account account = new Account(userName, passwordHash);
+        Account account = new Account(userName, firstName, lastName, passwordHash);
 
         accountRepository.save(account);
         return ResponseEntity.ok(account.accessToken);

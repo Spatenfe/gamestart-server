@@ -20,14 +20,12 @@ public class Account {
     @Column(unique=true)
     public String userName;
 
-    @ManyToMany
+    public String firstName;
+    public String lastName;
+
+    @OneToMany(mappedBy = "savedByAccount")
     @JsonIgnore
-    @JoinTable(
-            name = "saved_flight",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "flight_id")
-    )
-    public Set<Flight> savedFlight;
+    public Set<FlightTicket> flightTickets;
 
     @OneToMany
     @JsonIgnore
@@ -45,8 +43,10 @@ public class Account {
 
     }
 
-    public Account(String userName, String passwordHash) {
+    public Account(String userName, String firstName, String lastName, String passwordHash) {
         this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.passwordHash = passwordHash;
         this.accessToken = generateRandomAccessToken();
         this.privilidges = UserPrivilidges.USER_PRIVILIDGES;
