@@ -77,4 +77,35 @@ public class Flight extends Data {
         this.depatureDelayedMinutes = 0;
         this.isCanceled = false;
     }
+
+    public Flight(String flightNumber,
+                  Airport departureAirport,
+                  LocalDate departureDate,
+                  LocalTime departureTime,
+                  char departureGate,
+                  int departureTerminal,
+                  Airport arrivalAirport,
+                  LocalDate arrivalDate,
+                  LocalTime arrivalTime,
+                  char arrivalGate,
+                  int arrivalTerminal,
+                  String airline,
+                  int arrivalDelayedMinutes,
+                  int depatureDelayedMinutes) {
+        this.flightNumber = flightNumber;
+        this.departureAirport = departureAirport;
+        this.departureGate = departureGate;
+        this.departureTerminal = departureTerminal;
+        this.arrivalAirport = arrivalAirport;
+        this.arrivalGate = arrivalGate;
+        this.arrivalTerminal = arrivalTerminal;
+        this.departureDate = departureDate;
+        this.departureTime = departureTime;
+        this.arrivalDate = arrivalDate;
+        this.arrivalTime = arrivalTime;
+        this.airline = airline;
+        this.arrivalDelayedMinutes = arrivalDelayedMinutes;
+        this.depatureDelayedMinutes = depatureDelayedMinutes;
+        this.isCanceled = false;
+    }
 }
