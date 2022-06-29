@@ -23,7 +23,7 @@ public class Flight extends Data {
     public LocalTime departureTime;
     public int depatureDelayedMinutes;
 
-    public char departureGate;
+    public String departureGate;
     public int departureTerminal;
 
     public boolean isCanceled;
@@ -36,7 +36,7 @@ public class Flight extends Data {
     public LocalTime arrivalTime;
     public int arrivalDelayedMinutes;
 
-    public char arrivalGate;
+    public String arrivalGate;
     public int arrivalTerminal;
 
     public String airline;
@@ -52,12 +52,12 @@ public class Flight extends Data {
                   Airport departureAirport,
                   LocalDate departureDate,
                   LocalTime departureTime,
-                  char departureGate,
+                  String departureGate,
                   int departureTerminal,
                   Airport arrivalAirport,
                   LocalDate arrivalDate,
                   LocalTime arrivalTime,
-                  char arrivalGate,
+                  String arrivalGate,
                   int arrivalTerminal,
                   String airline) {
         this.flightNumber = flightNumber;
@@ -81,12 +81,12 @@ public class Flight extends Data {
                   Airport departureAirport,
                   LocalDate departureDate,
                   LocalTime departureTime,
-                  char departureGate,
+                  String departureGate,
                   int departureTerminal,
                   Airport arrivalAirport,
                   LocalDate arrivalDate,
                   LocalTime arrivalTime,
-                  char arrivalGate,
+                  String arrivalGate,
                   int arrivalTerminal,
                   String airline,
                   int arrivalDelayedMinutes,

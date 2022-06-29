@@ -74,51 +74,74 @@ public class FlightSystemApplication implements CommandLineRunner {
      * load database with demo data
      */
     private void initData() {
-        City Munich = new City("Munich", 34.4, 78);
-        City Hamburg = new City("Hamburg", 24.4, 44);
-        City Dresden = new City("Dresden", 36.4, 23);
-        City Berlin = new City("Berlin", 24.3, 25);
-        City Paris = new City("Paris", 14.4, 3);
+        //Cities
+        City Munich = new City("Munich", 48.142265, 11.569977);
+        City Hamburg = new City("Hamburg", 53.712586, 9.215304);
+        City Berlin = new City("Berlin", 52.507208, 13.424755);
+        City Paris = new City("Paris", 48.858884, 2.346941);
+        City NewYork = new City("NewYork", 40.711874, -74.017639);
+        City Seoul = new City("Seoul", 37.565092, 126.973851);
 
-        Airport munich_airport = new Airport("Munich Airport", "MNX", 23.3, 23.2, Munich);
-        Airport hamburg_airport = new Airport("Hamburg Airport", "HA", 23.3, 23.2, Hamburg);
-        Airport dresden_airport = new Airport("Dresden Airport", "DA", 23.3, 23.2, Dresden);
-        Airport berlin_airport = new Airport("Berlin Airport", "BTX", 23.3, 23.2, Berlin);
-        Airport berlin_tegel_airport = new Airport("Berlin Tegel Airport", "BTA", 23.3, 23.2, Berlin);
-        Airport paris_airport = new Airport("Paris Airport", "PA", 23.3, 23.2, Paris);
+        //Airports
+        Airport munich_airport = new Airport("Munich International Airport", "MUC", 48.348720, 11.819229, Munich);
+        Airport hamburg_airport = new Airport("Hamburg Airport", "HAM", 51.065565, 13.320923, Hamburg);
+        Airport berlin_airport = new Airport("Flughafen Berlin Brandenburg", "BER", 51.065565, 13.320923, Berlin);
+        Airport berlin_tegel_airport = new Airport("Berlin Tegel Airport", "TXL", 51.065565, 13.320923, Berlin);
+        Airport paris_airport = new Airport("Paris Charles de Gaulle Airport", "CDG", 51.065565, 13.320923, Paris);
+        Airport newYork_airport = new Airport("John F. Kennedy International Airport", "JFK", 40.642458, -73.779748, NewYork);
+        Airport seoul_airport = new Airport("Incheon International Airport", "ICN", 37.558187, 126.834412, Seoul);
 
-        Flight munich_to_hamburg = new Flight("ABC", munich_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), 'C', 1, hamburg_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), 'C', 1, "Lufthansa");
-        Flight munich_to_hamburg2 = new Flight("ABCD", munich_airport, LocalDate.of(2022, 6, 2), LocalTime.now(), 'C', 1, hamburg_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), 'C', 1, "Lufthansa");
-        Flight paris_to_berlinT = new Flight("ABCII", paris_airport, LocalDate.of(2022, 6, 2), LocalTime.now(), 'C', 1, berlin_tegel_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), 'C', 1, "Emirates");
-        Flight berlinT_to_berlin = new Flight("ABC", berlin_tegel_airport, LocalDate.of(2022, 6, 3), LocalTime.now(), 'C', 1, berlin_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), 'C', 1, "Turkish Airline");
-        Flight munich_to_dresden = new Flight("ABC", munich_airport, LocalDate.of(2022, 6, 3), LocalTime.now(), 'C', 1, dresden_airport, LocalDate.of(2022, 6, 4), LocalTime.now(), 'C', 1, "Eurowings");
+        //Flights
+        Flight munich_to_hamburg = new Flight("6532", munich_airport, LocalDate.of(2022, 8, 4), LocalTime.of(13, 30), "C34", 1, hamburg_airport, LocalDate.of(2022, 8, 4), LocalTime.of(17, 30), "A32", 1, "Lufthansa");
+        Flight munich_to_hamburg2 = new Flight("2376", munich_airport, LocalDate.of(2022, 8, 2), LocalTime.of(15, 0), "B21", 2, hamburg_airport, LocalDate.of(2022, 8, 2), LocalTime.of(19, 0), "B12", 2, "Lufthansa");
+        Flight paris_to_berlinT = new Flight("136", paris_airport, LocalDate.of(2022, 8, 2), LocalTime.of(7, 45), "D32", 1, berlin_tegel_airport, LocalDate.of(2022, 8, 2), LocalTime.of(10, 30), "C56", 1, "Emirates");
+        Flight berlinT_to_berlin = new Flight("1578", berlin_tegel_airport, LocalDate.of(2022, 8, 3), LocalTime.of(9, 30), "C21", 2, berlin_airport, LocalDate.of(2022, 8, 3), LocalTime.of(16, 30), "D3", 2, "Turkish Airline");
 
+        //Trip
+        Flight munich_to_paris = new Flight("2364", munich_airport, LocalDate.of(2022, 8, 10), LocalTime.of(19, 30), "A21", 1, paris_airport, LocalDate.of(2022, 8, 11), LocalTime.of(0, 30), "C54", 1, "Eurowings");
+        Flight paris_to_newyork = new Flight("2534", paris_airport, LocalDate.of(2022, 8, 13), LocalTime.of(7, 15), "B24", 2, newYork_airport, LocalDate.of(2022, 8, 13), LocalTime.of(16, 30), "C24", 2, "Lufthanse");
+        Flight newyork_to_seaoul = new Flight("5343", newYork_airport, LocalDate.of(2022, 8, 17), LocalTime.of(8, 45), "D31", 2, seoul_airport, LocalDate.of(2022, 8, 17), LocalTime.of(17, 15), "B54", 1, "Eurowings");
+        Flight seaoul_to_munich = new Flight("7654", seoul_airport, LocalDate.of(2022, 8, 19), LocalTime.of(11, 0), "A1", 1, munich_airport, LocalDate.of(2022, 8, 19), LocalTime.of(15, 45), "A94", 2, "Lufthanse");
+
+        //POI
         PointOfInterest TestPoi = new PointOfInterest("poiName", "poiContinent", "poiCountry", Munich, 10.4, 11.4, "poiDescription", "shorturl.at/tzO48", PointOfInterest.PoiType.OTHER);
-        PointOfInterest Bundestag = new PointOfInterest("Bundestag", "Europa", "Deutschland", Berlin, 1.4, 18.4, "Ist ziehmlich langweilig", "https://www.bundestag.de/resource/image/462008/16x9/750/422/d89f0f8b9392effdeb7d18d27754a859/55F9E6C4EA0E758275AA3DB2A11B5D98/plenum_teaser_sitzungsverlauf_bild.jpg",
-                PointOfInterest.PoiType.LANDMARK);
-        PointOfInterest BerlinerMauer = new PointOfInterest("Berliner Mauer", "Europa", "Deutschland", Berlin, 10.4, 11.4, "Ist ziehmlich lang", "https://images.reisereporter.de/YQgEixCsxcDJI97tFO1-D8XDMUp4odr8UI1Ji9VaVME/g:sm/rs:fill:1920:1080/ZWNkNGMxNDMtZGE/1OS00MGRlLWEzYW/ItMDBkOWM5OTRiM/GU5LmpwZw", PointOfInterest.PoiType.LANDMARK);
-        PointOfInterest TUM = new PointOfInterest("TUM Universität", "Europa", "Deutschland", Munich, 13.4, 8.4, "Ist ziehmlich cool", "https://www.tum.de/fileadmin/_processed_/3/2/csm_logo-tum_35fd07f043.png",
+        //poi Munich
+        PointOfInterest TUM = new PointOfInterest("TUM Universität", "Europa", "Deutschland", Munich, 11.567917, 48.149435, "The Technical University of Munich is a public research university in Munich, with additional campuses in Garching, Freising, Heilbronn, Straubing, and Singapore.", "https://www.tum.de/fileadmin/_processed_/3/2/csm_logo-tum_35fd07f043.png",
                 PointOfInterest.PoiType.PUBLIC_BUILDING);
-        PointOfInterest Eifelturm = new PointOfInterest("Eifelturm", "Europa", "Frankreich", Paris, 7.2, 5.6, "Ist ziehmlich hoch - La baguette!!!", "https://i.pinimg.com/736x/ce/4b/c3/ce4bc376016d8202176bdb9a479f46aa.jpg",
+        PointOfInterest frauenkirche = new PointOfInterest("Frauenkirche", "Europa", "Deutschland", Munich, 11.572799, 48.138569, "2 towers top this restored Gothic church, bombed in 1945, known for its legendary Devil's footprint.", "https://upload.wikimedia.org/wikipedia/commons/2/26/Frauenkirche_Munich_-_View_from_Peterskirche_Tower.jpg",
+                PointOfInterest.PoiType.PUBLIC_BUILDING);
+        PointOfInterest munich_hbh = new PointOfInterest("München Hauptbahnhof", "Europa", "Deutschland", Munich, 11.555363, 48.140654, "Airy mainline railway station with underground S- & U-Bahn platforms plus tram & bus connections.", "https://upload.wikimedia.org/wikipedia/commons/4/47/Hauptbahnhof_2014-08-02.JPG",
+                PointOfInterest.PoiType.TRANSPORTATION);
+        PointOfInterest englischer_garten = new PointOfInterest("Englischer Garten", "Europa", "Deutschland", Munich, 11.607589, 48.163827, "Expansive, 18th-century, urban park with 78km of cycling/jogging trails & a lakeside beer garden.", "https://cdn.muenchen-p.de/.imaging/stk/responsive/galleryLarge/dms/sw/c/lhm/lhm-e-garten-panorama/document/lhm-e-garten-panorama.jpg",
+                PointOfInterest.PoiType.OTHER);
+
+        //Berlin
+        PointOfInterest Bundestag = new PointOfInterest("Bundestag", "Europa", "Deutschland", Berlin, 13.375040, 52.518752, "Neo-Renaissance parliament building topped by a Norman Foster glass dome with 360-degree city views.", "https://www.bundestag.de/resource/image/462008/16x9/750/422/d89f0f8b9392effdeb7d18d27754a859/55F9E6C4EA0E758275AA3DB2A11B5D98/plenum_teaser_sitzungsverlauf_bild.jpg",
+                PointOfInterest.PoiType.PUBLIC_BUILDING);
+        PointOfInterest BerlinerMauer = new PointOfInterest("Berliner Mauer", "Europa", "Deutschland", Berlin, 13.377745, 52.515549, "Graffiti-covered remains of a Cold War barrier that divided the city, now a historical monument.", "https://images.reisereporter.de/YQgEixCsxcDJI97tFO1-D8XDMUp4odr8UI1Ji9VaVME/g:sm/rs:fill:1920:1080/ZWNkNGMxNDMtZGE/1OS00MGRlLWEzYW/ItMDBkOWM5OTRiM/GU5LmpwZw", PointOfInterest.PoiType.LANDMARK);
+        //Paris
+        PointOfInterest Eifelturm = new PointOfInterest("Eifelturm", "Europa", "Frankreich", Paris, 2.295028, 48.857904, "Gustave Eiffel's iconic, wrought-iron 1889 tower, with steps and elevators to observation decks.", "https://i.pinimg.com/736x/ce/4b/c3/ce4bc376016d8202176bdb9a479f46aa.jpg",
                 PointOfInterest.PoiType.LANDMARK);
-        PointOfInterest NightClub = new PointOfInterest("Trivia", "Europa", "Frankreich", Dresden, 7.2, 5.6, "Ist ziehmlich laut", "https://upload.wikimedia.org/wikipedia/commons/3/32/Wikipedia_space_ibiza%2803%29.jpg",
+        PointOfInterest NightClub = new PointOfInterest("Trivia Nightclub", "Europa", "Frankreich", Paris, 2.298498, 48.849107, "Vast, bilevel space for rollicking DJ parties, with a cocktail menu & go-go dancers.", "https://upload.wikimedia.org/wikipedia/commons/3/32/Wikipedia_space_ibiza%2803%29.jpg",
                 PointOfInterest.PoiType.NIGHTLIFE);
 
         List<City> cities = new ArrayList<>();
         cities.add(Munich);
         cities.add(Hamburg);
-        cities.add(Dresden);
         cities.add(Berlin);
         cities.add(Paris);
+        cities.add(NewYork);
+        cities.add(Seoul);
         cityRepository.saveAllAndFlush(cities);
 
         List<Airport> airports = new ArrayList<>();
         airports.add(munich_airport);
         airports.add(hamburg_airport);
-        airports.add(dresden_airport);
         airports.add(berlin_airport);
         airports.add(berlin_tegel_airport);
         airports.add(paris_airport);
+        airports.add(newYork_airport);
+        airports.add(seoul_airport);
         airportRepository.saveAllAndFlush(airports);
 
         List<Flight> flights = new ArrayList<>();
@@ -126,7 +149,10 @@ public class FlightSystemApplication implements CommandLineRunner {
         flights.add(munich_to_hamburg2);
         flights.add(paris_to_berlinT);
         flights.add(berlinT_to_berlin);
-        flights.add(munich_to_dresden);
+        flights.add(munich_to_paris);
+        flights.add(paris_to_newyork);
+        flights.add(newyork_to_seaoul);
+        flights.add(seaoul_to_munich);
         flightRepository.saveAllAndFlush(flights);
 
 
@@ -137,6 +163,9 @@ public class FlightSystemApplication implements CommandLineRunner {
         pois.add(TUM);
         pois.add(Eifelturm);
         pois.add(NightClub);
+        pois.add(frauenkirche);
+        pois.add(munich_hbh);
+        pois.add(englischer_garten);
         pointOfInterestRepository.saveAllAndFlush(pois);
     }
 }
