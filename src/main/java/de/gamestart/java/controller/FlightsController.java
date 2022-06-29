@@ -27,6 +27,9 @@ public class FlightsController {
 
     @Autowired
     private AccountRepository accountRepository;
+    
+    @Autowired
+    private FlightTicketRepository flightTicketRepository;
 
     /**
      * get all flights
@@ -144,6 +147,7 @@ public class FlightsController {
 
         Flight flight = flightRepository.findById(flightID).get();
         FlightTicket flightTicket = new FlightTicket(flight, account, seat);
+        flightTicketRepository.saveAndFlush(flightTicket);
         account.flightTickets.add(flightTicket);
         accountRepository.saveAndFlush(account);
         return ResponseEntity.ok(flightTicket);
