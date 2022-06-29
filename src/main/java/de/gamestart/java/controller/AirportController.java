@@ -27,14 +27,27 @@ public class AirportController {
     @Autowired
     private AccountRepository accountRepository;
 
+    /**
+     * get all Airports
+     *
+     * @param accessToken - Account access key
+     * @return - List of all Airports
+     */
     @GetMapping("/fetchAll")
     public ResponseEntity<List<Airport>> fetchAllAirpots(@RequestParam String accessToken) {
-        if(accountRepository.findByAccessToken(accessToken).size() == 0) {
+        if (accountRepository.findByAccessToken(accessToken).size() == 0) {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(airportRepository.findAll());
     }
 
+    /**
+     * returns all Airports of one City
+     *
+     * @param accessToken - Account access key
+     * @param cityId      - Id of city
+     * @return - returns list af all airports of this city
+     */
     @GetMapping("/getAllFromCity")
     public ResponseEntity<List<Airport>> findAllAirportsFromCity(@RequestParam String accessToken,
                                                                  @RequestParam long cityId) {

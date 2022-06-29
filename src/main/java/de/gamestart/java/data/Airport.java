@@ -1,10 +1,9 @@
-
 package de.gamestart.java.data;
 
 import javax.persistence.*;
 
 @Entity
-public class Airport extends Data{
+public class Airport extends Data {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long airportId;

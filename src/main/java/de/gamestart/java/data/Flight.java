@@ -45,7 +45,8 @@ public class Flight extends Data {
     @JsonIgnore
     private Set<FlightTicket> flightTickets;
 
-    public Flight() {}
+    public Flight() {
+    }
 
     public Flight(String flightNumber,
                   Airport departureAirport,

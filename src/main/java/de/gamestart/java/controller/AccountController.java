@@ -17,24 +17,40 @@ public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
 
+    /**
+     * checks if user is registered and returns access key
+     *
+     * @param userName     - username of account
+     * @param passwordHash - user password of account
+     * @return - returns access key to access further functions on the website
+     */
     @PostMapping("/authenticate")
     public ResponseEntity<String> authenticate(@RequestParam String userName, @RequestParam String passwordHash) {
         Optional<Account> account = accountRepository.findByUserName(userName).stream().findFirst();
-        if(account.isPresent()) {
+        if (account.isPresent()) {
             Account foundAccount = account.get();
-            if(foundAccount.passwordHash.equals(passwordHash)) {
+            if (foundAccount.passwordHash.equals(passwordHash)) {
                 return ResponseEntity.ok(foundAccount.accessToken);
             }
         }
         return ResponseEntity.badRequest().build();
     }
 
+    /**
+     * registers a new user and returns access key
+     *
+     * @param userName
+     * @param firstName
+     * @param lastName
+     * @param passwordHash
+     * @return - returns access key to access further functions on the website
+     */
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestParam String userName,
                                            @RequestParam String firstName,
                                            @RequestParam String lastName,
                                            @RequestParam String passwordHash) {
-        if(accountRepository.findByUserName(userName).size() > 0) {
+        if (accountRepository.findByUserName(userName).size() > 0) {
             return ResponseEntity.badRequest().build();
         }
 

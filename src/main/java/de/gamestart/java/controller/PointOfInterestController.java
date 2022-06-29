@@ -30,6 +30,13 @@ public class PointOfInterestController {
     private AccountRepository accountRepository;
 
 
+    /**
+     * get all point of interest of provided city
+     *
+     * @param accessToken - access key of account
+     * @param cityId      - id of city
+     * @return - returns all POIs of city
+     */
     @GetMapping("/getAllFromCity")
     public ResponseEntity<List<PointOfInterest>> findAllPoi(@RequestParam String accessToken,
                                                             @RequestParam long cityId) {
@@ -44,6 +51,12 @@ public class PointOfInterestController {
         return ResponseEntity.ok(pointOfInterestRepository.findByPoiCity(city));
     }
 
+    /**
+     * get all saved POIs of account
+     *
+     * @param accessToken - access key of account
+     * @return - returns all saved POIs of account
+     */
     @GetMapping("/savedPoi")
     public ResponseEntity<List<SavedPointOfInterest>> savedPoi(@RequestParam String accessToken) {
         if (accountRepository.findByAccessToken(accessToken).size() == 0) {
@@ -54,6 +67,13 @@ public class PointOfInterestController {
         return ResponseEntity.ok(savedPointOfInterestRepository.findByAccount(account));
     }
 
+    /**
+     * unsave POI of account with provided ID
+     *
+     * @param accessToken - access key of account
+     * @param poiId       - ID of POI which should be removed
+     * @return - returns removed POI or null if non-existent
+     */
     @DeleteMapping("/unsavePoi")
     public ResponseEntity<SavedPointOfInterest> unsavePoi(@RequestParam String accessToken, @RequestParam long poiId) {
         if (accountRepository.findByAccessToken(accessToken).size() == 0) {
@@ -75,6 +95,13 @@ public class PointOfInterestController {
         return ResponseEntity.ok(poi);
     }
 
+    /**
+     * saved poi to saved POI of account
+     *
+     * @param accessToken - access key of account
+     * @param poiId       - POI ID of POI which should be saved
+     * @return - returns saved POI
+     */
     @PostMapping("/savePoi")
     public ResponseEntity<SavedPointOfInterest> savePoi(@RequestParam String accessToken, @RequestParam long poiId) {
         if (accountRepository.findByAccessToken(accessToken).size() == 0) {

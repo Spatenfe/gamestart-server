@@ -13,7 +13,8 @@ public class City extends Data {
     public double cityLang;
     public double cityLong;
 
-    public City() {}
+    public City() {
+    }
 
     public City(String name, double lang, double log) {
         this.cityName = name;

@@ -7,25 +7,11 @@ import java.util.Set;
 
 @Entity
 public class PointOfInterest extends Data {
-    public enum PoiType {
-        RESTAURANT,
-        NIGHTLIFE,
-        LANDMARK,
-        PARKING_SPACE,
-        SHOP,
-        ENTERTAINMENT,
-        TRANSPORTATION,
-        PUBLIC_BUILDING,
-        OTHER
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long poiId;
-
     @Column(unique = true)
     public String poiName;
-
     public String poiContinent;
     public String poiCountry;
     @ManyToOne
@@ -33,11 +19,9 @@ public class PointOfInterest extends Data {
     public City poiCity;
     public double poiPosLong;
     public double poiPosLat;
-
     public String poiDescription;
     public String poiPictureUrl;
     public PoiType poiType;
-
     @OneToMany(mappedBy = "savedPoi")
     @JsonIgnore
     public Set<SavedPointOfInterest> savedBy;
@@ -55,5 +39,17 @@ public class PointOfInterest extends Data {
         this.poiDescription = poiDescription;
         this.poiPictureUrl = poiPictureUrl;
         this.poiType = poiType;
+    }
+
+    public enum PoiType {
+        RESTAURANT,
+        NIGHTLIFE,
+        LANDMARK,
+        PARKING_SPACE,
+        SHOP,
+        ENTERTAINMENT,
+        TRANSPORTATION,
+        PUBLIC_BUILDING,
+        OTHER
     }
 }
