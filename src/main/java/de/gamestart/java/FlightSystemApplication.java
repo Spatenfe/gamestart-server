@@ -99,9 +99,9 @@ public class FlightSystemApplication implements CommandLineRunner {
 
         //Trip
         Flight munich_to_paris = new Flight("2364", munich_airport, LocalDate.of(2022, 8, 10), LocalTime.of(19, 30), "A21", 1, paris_airport, LocalDate.of(2022, 8, 11), LocalTime.of(0, 30), "C54", 1, "Eurowings");
-        Flight paris_to_newyork = new Flight("2534", paris_airport, LocalDate.of(2022, 8, 13), LocalTime.of(7, 15), "B24", 2, newYork_airport, LocalDate.of(2022, 8, 13), LocalTime.of(16, 30), "C24", 2, "Lufthanse");
+        Flight paris_to_newyork = new Flight("2534", paris_airport, LocalDate.of(2022, 8, 13), LocalTime.of(7, 15), "B24", 2, newYork_airport, LocalDate.of(2022, 8, 13), LocalTime.of(16, 30), "C24", 2, "Lufthansa");
         Flight newyork_to_seaoul = new Flight("5343", newYork_airport, LocalDate.of(2022, 8, 17), LocalTime.of(8, 45), "D31", 2, seoul_airport, LocalDate.of(2022, 8, 17), LocalTime.of(17, 15), "B54", 1, "Eurowings");
-        Flight seaoul_to_munich = new Flight("7654", seoul_airport, LocalDate.of(2022, 8, 19), LocalTime.of(11, 0), "A1", 1, munich_airport, LocalDate.of(2022, 8, 19), LocalTime.of(15, 45), "A94", 2, "Lufthanse");
+        Flight seaoul_to_munich = new Flight("7654", seoul_airport, LocalDate.of(2022, 8, 19), LocalTime.of(11, 0), "A1", 1, munich_airport, LocalDate.of(2022, 8, 19), LocalTime.of(15, 45), "A94", 2, "Lufthansa");
 
         //POI
         PointOfInterest TestPoi = new PointOfInterest("poiName", "poiContinent", "poiCountry", Munich, 10.4, 11.4, "poiDescription", "shorturl.at/tzO48", PointOfInterest.PoiType.OTHER);
