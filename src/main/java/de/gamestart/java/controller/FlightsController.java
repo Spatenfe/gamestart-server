@@ -7,6 +7,7 @@ import de.gamestart.java.data.FlightTicket;
 import de.gamestart.java.repository.AccountRepository;
 import de.gamestart.java.repository.AirportRepository;
 import de.gamestart.java.repository.FlightRepository;
+import de.gamestart.java.repository.FlightTicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -117,6 +118,12 @@ public class FlightsController {
 
         if (!account.flightTickets.remove(account.flightTickets.stream().filter(t -> t.saveFlight.flightId == flightID).findFirst().get())) {
             return ResponseEntity.ok(null);
+        }
+
+        List<FlightTicket> flightTicket = flightTicketRepository.findBySavedByAccountAndSaveFlight(account, flight);
+
+        if(flightTicket.size() != 0) {
+            flightTicketRepository.delete(flightTicket.get(0));
         }
 
         accountRepository.saveAndFlush(account);
