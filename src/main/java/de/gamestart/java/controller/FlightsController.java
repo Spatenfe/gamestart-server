@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/flight")
@@ -152,5 +154,24 @@ public class FlightsController {
         account.flightTickets.add(flightTicket);
         accountRepository.saveAndFlush(account);
         return ResponseEntity.ok(flightTicket);
+    }
+
+    @GetMapping("/isSavedFlight")
+    public ResponseEntity<FlightTicket> isSavedFlight(@RequestParam String accessToken, @RequestParam long flightID) {
+        if (accountRepository.findByAccessToken(accessToken).size() == 0) {
+            return ResponseEntity.badRequest().build();
+        }
+        Account account = accountRepository.findByAccessToken(accessToken).get(0);
+
+        if (flightRepository.findById(flightID).isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        List<FlightTicket> savedFlights = account.flightTickets.stream().filter(t -> t.saveFlight.flightId == flightID).toList();
+
+        if(savedFlights.size() > 0){
+            return ResponseEntity.ok(savedFlights.get(0));
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

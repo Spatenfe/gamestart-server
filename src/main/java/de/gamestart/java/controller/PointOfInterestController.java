@@ -1,9 +1,6 @@
 package de.gamestart.java.controller;
 
-import de.gamestart.java.data.Account;
-import de.gamestart.java.data.City;
-import de.gamestart.java.data.PointOfInterest;
-import de.gamestart.java.data.SavedPointOfInterest;
+import de.gamestart.java.data.*;
 import de.gamestart.java.repository.AccountRepository;
 import de.gamestart.java.repository.CityRepository;
 import de.gamestart.java.repository.PointOfInterestRepository;
@@ -120,6 +117,25 @@ public class PointOfInterestController {
         account.savedPoi.add(savedPoi);
         accountRepository.saveAndFlush(account);
         return ResponseEntity.ok(savedPoi);
+    }
+
+    @GetMapping("/isPoiSaved")
+    public ResponseEntity<SavedPointOfInterest> isSavedPoi(@RequestParam String accessToken, @RequestParam long poiId) {
+        if (accountRepository.findByAccessToken(accessToken).size() == 0) {
+            return ResponseEntity.badRequest().build();
+        }
+        Account account = accountRepository.findByAccessToken(accessToken).get(0);
+
+        if (pointOfInterestRepository.findById(poiId).isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        List<SavedPointOfInterest> savedPois = account.savedPoi.stream().filter(t -> t.savedPoi.poiId == poiId).toList();
+
+        if(savedPois.size() > 0){
+            return ResponseEntity.ok(savedPois.get(0));
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
