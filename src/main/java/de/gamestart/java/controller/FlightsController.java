@@ -7,6 +7,7 @@ import de.gamestart.java.data.FlightTicket;
 import de.gamestart.java.repository.AccountRepository;
 import de.gamestart.java.repository.AirportRepository;
 import de.gamestart.java.repository.FlightRepository;
+import de.gamestart.java.repository.FlightTicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
