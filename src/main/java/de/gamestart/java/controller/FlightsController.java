@@ -122,6 +122,12 @@ public class FlightsController {
             return ResponseEntity.ok(null);
         }
 
+        List<FlightTicket> flightTicket = flightTicketRepository.findBySavedByAccountAndSaveFlight(account, flight);
+
+        if(flightTicket.size() != 0) {
+            flightTicketRepository.delete(flightTicket.get(0));
+        }
+
         accountRepository.saveAndFlush(account);
 
         return ResponseEntity.ok(flight);
