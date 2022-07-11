@@ -84,10 +84,10 @@ public class FlightSystemApplication implements CommandLineRunner {
 
         //Airports
         Airport munich_airport = new Airport("Munich International Airport", "MUC", 48.348720, 11.819229, Munich);
-        Airport hamburg_airport = new Airport("Hamburg Airport", "HAM", 51.065565, 13.320923, Hamburg);
-        Airport berlin_airport = new Airport("Flughafen Berlin Brandenburg", "BER", 51.065565, 13.320923, Berlin);
-        Airport berlin_tegel_airport = new Airport("Berlin Tegel Airport", "TXL", 51.065565, 13.320923, Berlin);
-        Airport paris_airport = new Airport("Paris Charles de Gaulle Airport", "CDG", 51.065565, 13.320923, Paris);
+        Airport hamburg_airport = new Airport("Hamburg Airport", "HAM", 53.6441255, 9.99542756, Hamburg);
+        Airport berlin_airport = new Airport("Flughafen Berlin Brandenburg", "BER", 52.364717, 13.5110082, Berlin);
+        Airport berlin_tegel_airport = new Airport("Berlin Tegel Airport", "TXL", 52.55896313, 13.28850177, Berlin);
+        Airport paris_airport = new Airport("Paris Charles de Gaulle Airport", "CDG", 49.00826833, 2.5509443, Paris);
         Airport newYork_airport = new Airport("John F. Kennedy International Airport", "JFK", 40.642458, -73.779748, NewYork);
         Airport seoul_airport = new Airport("Incheon International Airport", "ICN", 37.558187, 126.834412, Seoul);
 
