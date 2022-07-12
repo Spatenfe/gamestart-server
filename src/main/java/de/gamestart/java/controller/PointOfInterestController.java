@@ -61,7 +61,7 @@ public class PointOfInterestController {
         }
 
         Account account = accountRepository.findByAccessToken(accessToken).get(0);
-        return ResponseEntity.ok(savedPointOfInterestRepository.findByAccount(account));
+        return ResponseEntity.ok(account.savedPoi.stream().toList());
     }
 
     /**

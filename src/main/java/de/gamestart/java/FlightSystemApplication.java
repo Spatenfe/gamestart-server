@@ -96,6 +96,15 @@ public class FlightSystemApplication implements CommandLineRunner {
         Flight munich_to_hamburg2 = new Flight("2376", munich_airport, LocalDate.of(2022, 8, 2), LocalTime.of(15, 0), "B21", 2, hamburg_airport, LocalDate.of(2022, 8, 2), LocalTime.of(19, 0), "B12", 2, "Lufthansa");
         Flight paris_to_berlinT = new Flight("136", paris_airport, LocalDate.of(2022, 8, 2), LocalTime.of(7, 45), "D32", 1, berlin_tegel_airport, LocalDate.of(2022, 8, 2), LocalTime.of(10, 30), "C56", 1, "Emirates");
         Flight berlinT_to_berlin = new Flight("1578", berlin_tegel_airport, LocalDate.of(2022, 8, 3), LocalTime.of(9, 30), "C21", 2, berlin_airport, LocalDate.of(2022, 8, 3), LocalTime.of(16, 30), "D3", 2, "Turkish Airline");
+        //on day seoul -> munich
+        Flight seaoul_to_munich2 = new Flight("7632", seoul_airport, LocalDate.of(2022, 8, 21), LocalTime.of(4, 0), "A1", 1, munich_airport, LocalDate.of(2022, 8, 21), LocalTime.of(17, 10), "A94", 1, "Lufthansa");
+        Flight seaoul_to_munich3 = new Flight("6155", seoul_airport, LocalDate.of(2022, 8, 21), LocalTime.of(6, 25), "B2", 2, munich_airport, LocalDate.of(2022, 8, 21), LocalTime.of(19, 35), "B4", 2, "Emirates");
+        Flight seaoul_to_munich4 = new Flight("3652", seoul_airport, LocalDate.of(2022, 8, 21), LocalTime.of(11, 45), "A6", 1, munich_airport, LocalDate.of(2022, 8, 22), LocalTime.of(0, 10), "E9", 1, "Lufthansa");
+        Flight seaoul_to_munich5 = new Flight("1654", seoul_airport, LocalDate.of(2022, 8, 21), LocalTime.of(15, 10), "B11", 2, munich_airport, LocalDate.of(2022, 8, 22), LocalTime.of(3, 20), "A6", 1, "Turkish Airline");
+        Flight seaoul_to_munich6 = new Flight("4651", seoul_airport, LocalDate.of(2022, 8, 21), LocalTime.of(18, 0), "F17", 1, munich_airport, LocalDate.of(2022, 8, 22), LocalTime.of(6, 30), "A7", 2, "Eurowings");
+        Flight seaoul_to_munich7 = new Flight("4651", seoul_airport, LocalDate.of(2022, 8, 21), LocalTime.of(20, 30), "C21", 2, munich_airport, LocalDate.of(2022, 8, 22), LocalTime.of(9, 0), "B1", 1, "Lufthansa");
+        Flight seaoul_to_munich8 = new Flight("4651", seoul_airport, LocalDate.of(2022, 8, 21), LocalTime.of(23, 10), "D1", 1, munich_airport, LocalDate.of(2022, 8, 22), LocalTime.of(12, 20), "E2", 2, "Eurowings");
+
 
         //Trip
         Flight munich_to_paris = new Flight("2364", munich_airport, LocalDate.of(2022, 8, 10), LocalTime.of(19, 30), "A21", 1, paris_airport, LocalDate.of(2022, 8, 11), LocalTime.of(0, 30), "C54", 1, "Eurowings");
@@ -103,8 +112,6 @@ public class FlightSystemApplication implements CommandLineRunner {
         Flight newyork_to_seaoul = new Flight("5343", newYork_airport, LocalDate.of(2022, 8, 17), LocalTime.of(8, 45), "D31", 2, seoul_airport, LocalDate.of(2022, 8, 17), LocalTime.of(17, 15), "B54", 1, "Eurowings");
         Flight seaoul_to_munich = new Flight("7654", seoul_airport, LocalDate.of(2022, 8, 19), LocalTime.of(11, 0), "A1", 1, munich_airport, LocalDate.of(2022, 8, 19), LocalTime.of(15, 45), "A94", 2, "Lufthansa");
 
-        //POI
-        PointOfInterest TestPoi = new PointOfInterest("poiName", "poiContinent", "poiCountry", Munich, 10.4, 11.4, "poiDescription", "shorturl.at/tzO48", PointOfInterest.PoiType.OTHER);
         //poi Munich
         PointOfInterest TUM = new PointOfInterest("TUM Universität", "Europa", "Deutschland", Munich, 11.567917, 48.149435, "The Technical University of Munich is a public research university in Munich, with additional campuses in Garching, Freising, Heilbronn, Straubing, and Singapore.", "https://www.tum.de/fileadmin/_processed_/3/2/csm_logo-tum_35fd07f043.png",
                 PointOfInterest.PoiType.PUBLIC_BUILDING);
@@ -153,11 +160,17 @@ public class FlightSystemApplication implements CommandLineRunner {
         flights.add(paris_to_newyork);
         flights.add(newyork_to_seaoul);
         flights.add(seaoul_to_munich);
+        flights.add(seaoul_to_munich2);
+        flights.add(seaoul_to_munich3);
+        flights.add(seaoul_to_munich4);
+        flights.add(seaoul_to_munich5);
+        flights.add(seaoul_to_munich6);
+        flights.add(seaoul_to_munich7);
+        flights.add(seaoul_to_munich8);
         flightRepository.saveAllAndFlush(flights);
 
 
         List<PointOfInterest> pois = new ArrayList<>();
-        pois.add(TestPoi);
         pois.add(Bundestag);
         pois.add(BerlinerMauer);
         pois.add(TUM);
