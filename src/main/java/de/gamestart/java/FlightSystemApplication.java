@@ -113,7 +113,7 @@ public class FlightSystemApplication implements CommandLineRunner {
         Flight seoul_to_munich = new Flight("7654", seoul_airport, LocalDate.of(2022, 8, 19), LocalTime.of(11, 0), "A1", 1, munich_airport, LocalDate.of(2022, 8, 19), LocalTime.of(15, 45), "A94", 2, "Lufthansa");
 
         //poi Munich
-        PointOfInterest TUM = new PointOfInterest("TUM Universität", "Europa", "Deutschland", Munich, 11.567917, 48.149435, "The Technical University of Munich is a public research university in Munich, with additional campuses in Garching, Freising, Heilbronn, Straubing, and Singapore.", "https://www.tum.de/fileadmin/_processed_/3/2/csm_logo-tum_35fd07f043.png",
+        PointOfInterest TUM = new PointOfInterest("TUM Universität", "Europa", "Deutschland", Munich, 11.567917, 48.149435, "The Technical University of Munich is a public research university in Munich, with additional campuses in Garching, Freising, Heilbronn, Straubing, and Singapore.", "https://oia.ugm.ac.id/wp-content/uploads/sites/326/2021/04/TUMASIA-825x455.jpg",
                 PointOfInterest.PoiType.PUBLIC_BUILDING);
         PointOfInterest frauenkirche = new PointOfInterest("Frauenkirche", "Europa", "Deutschland", Munich, 11.572799, 48.138569, "2 towers top this restored Gothic church, bombed in 1945, known for its legendary Devil's footprint.", "https://upload.wikimedia.org/wikipedia/commons/2/26/Frauenkirche_Munich_-_View_from_Peterskirche_Tower.jpg",
                 PointOfInterest.PoiType.PUBLIC_BUILDING);

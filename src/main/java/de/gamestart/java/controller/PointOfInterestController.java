@@ -61,6 +61,7 @@ public class PointOfInterestController {
         }
 
         Account account = accountRepository.findByAccessToken(accessToken).get(0);
+
         return ResponseEntity.ok(account.savedPoi.stream().toList());
     }
 
@@ -109,6 +110,12 @@ public class PointOfInterestController {
         if (pointOfInterestRepository.findById(poiId).isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
+
+        List<SavedPointOfInterest> curSet = account.savedPoi.stream().filter(x -> x.savedPoi.poiId == poiId).toList();
+        if(curSet.size() > 0){
+            return ResponseEntity.ok(curSet.get(0));
+        }
+
 
         PointOfInterest poi = pointOfInterestRepository.findById(poiId).get();
         SavedPointOfInterest savedPoi = new SavedPointOfInterest(poi, LocalDate.now(), account);
