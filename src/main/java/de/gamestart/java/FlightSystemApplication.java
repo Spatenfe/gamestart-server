@@ -112,7 +112,7 @@ public class FlightSystemApplication implements CommandLineRunner {
         Flight newyork_to_seoul = new Flight("5343", newYork_airport, LocalDate.of(2022, 8, 17), LocalTime.of(8, 45), "D31", 2, seoul_airport, LocalDate.of(2022, 8, 17), LocalTime.of(17, 15), "B54", 1, "Eurowings");
         Flight seoul_to_munich = new Flight("7654", seoul_airport, LocalDate.of(2022, 8, 19), LocalTime.of(11, 0), "A1", 1, munich_airport, LocalDate.of(2022, 8, 19), LocalTime.of(15, 45), "A94", 2, "Lufthansa");
 
-        //poi Munich
+        //POIs Munich
         PointOfInterest TUM = new PointOfInterest("TUM Universität", "Europa", "Deutschland", Munich, 11.567917, 48.149435, "The Technical University of Munich is a public research university in Munich, with additional campuses in Garching, Freising, Heilbronn, Straubing, and Singapore.", "https://oia.ugm.ac.id/wp-content/uploads/sites/326/2021/04/TUMASIA-825x455.jpg",
                 PointOfInterest.PoiType.PUBLIC_BUILDING);
         PointOfInterest frauenkirche = new PointOfInterest("Frauenkirche", "Europa", "Deutschland", Munich, 11.572799, 48.138569, "2 towers top this restored Gothic church, bombed in 1945, known for its legendary Devil's footprint.", "https://upload.wikimedia.org/wikipedia/commons/2/26/Frauenkirche_Munich_-_View_from_Peterskirche_Tower.jpg",
@@ -122,14 +122,27 @@ public class FlightSystemApplication implements CommandLineRunner {
         PointOfInterest englischer_garten = new PointOfInterest("Englischer Garten", "Europa", "Deutschland", Munich, 11.607589, 48.163827, "Expansive, 18th-century, urban park with 78km of cycling/jogging trails & a lakeside beer garden.", "https://cdn.muenchen-p.de/.imaging/stk/responsive/galleryLarge/dms/sw/c/lhm/lhm-e-garten-panorama/document/lhm-e-garten-panorama.jpg",
                 PointOfInterest.PoiType.OTHER);
 
-        //Berlin
+        //POIs Berlin
         PointOfInterest Bundestag = new PointOfInterest("Bundestag", "Europa", "Deutschland", Berlin, 13.375040, 52.518752, "Neo-Renaissance parliament building topped by a Norman Foster glass dome with 360-degree city views.", "https://www.bundestag.de/resource/image/462008/16x9/750/422/d89f0f8b9392effdeb7d18d27754a859/55F9E6C4EA0E758275AA3DB2A11B5D98/plenum_teaser_sitzungsverlauf_bild.jpg",
                 PointOfInterest.PoiType.PUBLIC_BUILDING);
         PointOfInterest BerlinerMauer = new PointOfInterest("Berliner Mauer", "Europa", "Deutschland", Berlin, 13.377745, 52.515549, "Graffiti-covered remains of a Cold War barrier that divided the city, now a historical monument.", "https://images.reisereporter.de/YQgEixCsxcDJI97tFO1-D8XDMUp4odr8UI1Ji9VaVME/g:sm/rs:fill:1920:1080/ZWNkNGMxNDMtZGE/1OS00MGRlLWEzYW/ItMDBkOWM5OTRiM/GU5LmpwZw", PointOfInterest.PoiType.LANDMARK);
-        //Paris
+
+        //POIs Paris
         PointOfInterest Eifelturm = new PointOfInterest("Eifelturm", "Europa", "Frankreich", Paris, 2.295028, 48.857904, "Gustave Eiffel's iconic, wrought-iron 1889 tower, with steps and elevators to observation decks.", "https://i.pinimg.com/736x/ce/4b/c3/ce4bc376016d8202176bdb9a479f46aa.jpg",
                 PointOfInterest.PoiType.LANDMARK);
         PointOfInterest NightClub = new PointOfInterest("Trivia Nightclub", "Europa", "Frankreich", Paris, 2.298498, 48.849107, "Vast, bilevel space for rollicking DJ parties, with a cocktail menu & go-go dancers.", "https://upload.wikimedia.org/wikipedia/commons/3/32/Wikipedia_space_ibiza%2803%29.jpg",
+                PointOfInterest.PoiType.NIGHTLIFE);
+
+        //POIs New York
+        PointOfInterest StatueOfLiberty = new PointOfInterest("Statue of Liberty",
+                "Nordamerica", "USA", NewYork, 40.6893958, -74.04451117,
+                "Statue located on Liberty Island in New York Harbor, presented to the United States on the centennial of the signing of the American Declaration of Independence as a gift from France.",
+                "https://upload.wikimedia.org/wikipedia/commons/d/d3/Statue_of_Liberty%2C_NY.jpg",
+                PointOfInterest.PoiType.LANDMARK);
+        PointOfInterest EmpireStateBuilding = new PointOfInterest("Empire State Building",
+                "Nordamerica", "USA", NewYork, 40.7486274, -73.9856536,
+                "A 102-story skyscraper in Manhattan, New York City. It was designed by Shreve, Lamb & Harmon and built from 1930 to 1931",
+                "https://upload.wikimedia.org/wikipedia/commons/1/10/Empire_State_Building_%28aerial_view%29.jpg",
                 PointOfInterest.PoiType.NIGHTLIFE);
 
         List<City> cities = new ArrayList<>();
@@ -179,6 +192,8 @@ public class FlightSystemApplication implements CommandLineRunner {
         pois.add(frauenkirche);
         pois.add(munich_hbh);
         pois.add(englischer_garten);
+        pois.add(StatueOfLiberty);
+        pois.add(EmpireStateBuilding);
         pointOfInterestRepository.saveAllAndFlush(pois);
     }
 }
